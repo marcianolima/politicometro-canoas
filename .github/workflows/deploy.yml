@@ -54,6 +54,21 @@ jobs:
           test -s site/data/canoas.geojson
           test -s site/data/prefeito-2024.json
           test -s site/data/secoes-2024.json
+      - name: Instalar Chromium para smoke tests reais
+        run: |
+          npm install --no-save playwright@1.56.1
+          npx playwright install --with-deps chromium
+      - name: Validar interface desktop/mobile em Chromium
+        run: |
+          python -m http.server 8765 --bind 127.0.0.1 --directory site >/tmp/politicometro-http.log 2>&1 &
+          node tests/smoke.mjs
+      - name: Armazenar screenshots de homologação
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: homologacao-visual-chromium
+          path: smoke-artifacts/
+          if-no-files-found: ignore
       - name: Configurar GitHub Pages
         uses: actions/configure-pages@v5
       - name: Enviar artefato Pages
