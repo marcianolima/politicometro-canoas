@@ -80,7 +80,7 @@ class FinanceTests(unittest.TestCase):
         self.assertAlmostEqual(y25["despesaPaga"],2279083240.29,places=2)
         self.assertGreater(y25["despesaEmpenhada"],y25["despesaLiquidada"])
         self.assertGreater(y25["despesaLiquidada"],y25["despesaPaga"])
-        self.assertTrue(any("SICONFI" in f["tipo"] or "SICONFI" in f["url"] for f in data["fontes"]))
+        self.assertTrue(any("siconfi" in (f["tipo"]+" "+f["url"]).lower() for f in data["fontes"]))
         self.assertNotAlmostEqual(y25["receitaRealizada"],next(x for x in read("financas-rreo.json")["periodos"] if x["fim"]=="2024-12-31")["receitas"]["realizadas"])
 
     def test_contract_parser_validation(self):
