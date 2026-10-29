@@ -59,6 +59,11 @@ async function financeOne(label,viewport){
  assert.match(await page.locator(".fiscal-metric").nth(1).innerText(),/2,8/,"receita 2024");
  assert.match(await page.locator("#capitalTotal").innerText(),/339/,"despesa de capital RREO");
  assert.equal(await page.locator("#historyPlot .history-group").count(),3,"três recortes 2024");
+ await page.locator("#dcaSummary .fiscal-metric").first().waitFor({timeout:20000});
+ assert.equal(await page.locator("#dcaSummary .fiscal-metric").count(),3,"três totais DCA 2025");
+ assert.equal(await page.locator("#dcaChart .dca-year").count(),11,"série anual 2015–2025");
+ assert.equal(await page.locator("#dcaFunctions .dca-function").count(),19,"distribuição funcional 2025");
+ assert.equal(await page.locator("#dcaRows tr").count(),11,"tabela anual DCA");
  await page.locator("#periodSelect").selectOption("2025-04-30");
  assert.equal(await page.locator("#capitalTotal").innerText(),"Não disponível","não extrapolar capital de 2024");
  assert.match(await page.locator("#periodNotice").innerText(),/parcial/,"alerta para 2025 incompleto");
