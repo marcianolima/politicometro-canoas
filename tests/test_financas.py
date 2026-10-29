@@ -60,12 +60,15 @@ class FinanceTests(unittest.TestCase):
         data=read("contratos-pncp.json")
         self.assertEqual(data["cnpjOrgao"],"88577416000118")
         self.assertEqual(data["ibge"],"4304606")
-        self.assertIn(data["status"],("aguardando-coleta","verificado"))
-        if data["status"]!="verificado":
+        self.assertIn(data["status"],("aguardando-coleta","parcial","verificado"))
+        if data["status"]=="aguardando-coleta":
             self.assertIsNone(data["coletadoEm"])
             self.assertFalse(data["contratos"])
         else:
             self.assertEqual(data["totalRegistros"],len(data["contratos"]))
+            self.assertGreaterEqual(data["mesesCompletos"],1)
+            self.assertLessEqual(data["mesesCompletos"],12)
+            self.assertGreaterEqual(data["fim"],data["inicio"])
             ids=set()
             for contract in data["contratos"]:
                 self.assertNotIn(contract["id"],ids)
