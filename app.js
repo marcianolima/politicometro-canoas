@@ -50,7 +50,7 @@ async function map(){
  }catch(e){$("#mapStatus").textContent="Não foi possível carregar a malha: "+e.message;$("#cityMap").innerHTML='<text x="45" y="160" fill="#718271">Malha municipal indisponível</text>'}
 }
 function sourceLinks(p){
- return '<div class="profile-sources"><strong>Fontes oficiais e conferência</strong><a href="https://resultados.tre-rs.jus.br/eleicoes/2024/'+(p.cargo==="Vereador"?"619":"620")+'/RS85898.html" target="_blank" rel="noopener noreferrer">TRE-RS: resultados de 2024 ↗</a><a href="https://dadosabertos.tse.jus.br/dataset/candidatos-2024" target="_blank" rel="noopener noreferrer">TSE: candidaturas e bens declarados ↗</a><a href="https://camaracanoas.rs.gov.br/" target="_blank" rel="noopener noreferrer">Câmara Municipal: mandatos e atividades ↗</a></div>';
+ return '<div class="profile-sources"><strong>Fontes oficiais e conferência</strong><a href="https://resultados.tre-rs.jus.br/eleicoes/2024/'+(p.cargo==="Vereador"?"619":"620")+'/RS85898.html" target="_blank" rel="noopener noreferrer">TRE-RS: resultados de 2024 ↗</a><a href="https://dadosabertos.tse.jus.br/dataset/candidatos-2024" target="_blank" rel="noopener noreferrer">TSE: candidaturas e bens declarados ↗</a><a href="https://camaracanoas.rs.gov.br/" target="_blank" rel="noopener noreferrer">Câmara Municipal: mandatos e atividades ↗</a><a href="?candidate='+encodeURIComponent(p.id)+'#analise-eleitoral">Votos por zona e seção eleitoral ↗</a></div>';
 }
 function detailGrid(p){
  const data=[["Cargo da eleição",p.cargo],["Partido da eleição",p.partido],["Número",p.numero||"Não registrado"],["Votos",p.cargo==="Vice-prefeito"?"Votação da chapa":number(p.votos)],["Turno",String(p.turno)+"º"],["Mandato previsto","2025–2028"]];
