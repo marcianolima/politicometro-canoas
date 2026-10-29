@@ -69,14 +69,26 @@ class TestPoliticalRecords(unittest.TestCase):
             self.assertEqual(str(feature["properties"]["codarea"]), "4304606")
             self.assertIn(feature["geometry"]["type"], ("Polygon", "MultiPolygon"))
 
+    def test_legislative_snapshots(self):
+        council = load("composicao-camara.json")
+        senate = load("senadores-rs.json")
+        self.assertEqual(council["municipioIbge"], "4304606")
+        self.assertEqual(len(council["vereadores"]), 21)
+        self.assertEqual(len(set(council["vereadores"])), 21)
+        self.assertEqual(senate["uf"], "RS")
+        self.assertEqual(len(senate["senadores"]), 3)
+        self.assertEqual(len({x["nome"] for x in senate["senadores"]}), 3)
+
     def test_site_assets_and_neutrality(self):
-        for name in ("index.html", "styles.css", "app.js", "favicon.svg"):
+        for name in ("index.html", "styles.css", "app.js", "extras.js", "extras.css", "favicon.svg"):
             self.assertTrue((ROOT / name).is_file(), name)
         html = (ROOT / "index.html").read_text(encoding="utf-8")
         script = (ROOT / "app.js").read_text(encoding="utf-8")
         self.assertIn('id="representantes"', html)
         self.assertIn('id="cityMap"', html)
         self.assertIn('id="modal"', html)
+        self.assertIn('id="exercicio"', html)
+        self.assertIn('id="senado"', html)
         self.assertIn("Não disponível", script)
         self.assertNotIn("nota de desempenho", html.lower())
         self.assertIn("sem", html.lower())
