@@ -19,6 +19,20 @@ Observatório cívico independente para **Canoas / RS (IBGE 4304606)**, inspirad
 - Bancada de três senadores em exercício pelo RS, com mandatos e partidos segundo fonte do Congresso Nacional; representantes estaduais, não exclusivamente municipais.
 - Site estático, responsivo, sem backend pago ou chaves de API; GitHub Actions para testes, coleta de fontes e publicação.
 
+## Finanças públicas, investimentos, contratos e obras
+
+**Página específica:** [Orçamento e Obras](https://marcianolima.github.io/politicometro-canoas/financas.html) — `financas.html`.
+
+- **RREO consolidado da Prefeitura:** cinco fotografias oficiais de 2024–2025, com receita prevista/realizada, dotação inicial/atualizada, créditos adicionais, despesas empenhadas/liquidadas/pagas e suas razões. Fechamento de 2024 inclui despesa de capital líquida, receita corrente líquida, restos a pagar e aplicação constitucional em Saúde, Educação e FUNDEB. Fonte individual de cada fotografia ligada diretamente ao PDF municipal. Dados não são atualizados em tempo real.
+- **DCA/SICONFI anual (base distinta do RREO):** histórico nominal 2015–2025 de receitas e despesas **exceto intraorçamentárias**, último ano com liquidações e pagamentos; gráfico anual e 19 funções de despesa em 2025. **Status: reprodução secundária da DCA**, de fontes que identificam o SICONFI; conferência direta automática com o Tesouro ainda pendente. As funções de 2025 são arredondadas. Não juntar RREO consolidado e DCA exceto intraorçamentárias na mesma série.
+- **Contratos públicos PNCP:** coleta programada de todas as páginas publicadas no exercício de 2026 pelo CNPJ 88.577.416/0001-18. Dados somente substituídos após todas as janelas e páginas passarem pela verificação. Busca por objeto e fornecedor, filtro de objetos de obras, ordenação, CSV e fonte individual. Estado inicial `aguardando-coleta` até êxito da API.
+- **Projetos e obras:** identificação lexical de objetos relacionados a obras nos contratos PNCP, sem confundir contratação, pagamento, medição física e entrega; encaminhamento à fiscalização TCE-RS. Não existe ainda cadastro consolidado de obras com etapas, geometrias e medições — é lacuna expressa, não substituída por inferências.
+- **Usabilidade:** página independente responsiva, tabelas e gráficos, acesso pela navegação e CTA da página inicial, exportação CSV, testes Python de integridade, verificação JS e testes Chromium desktop/mobile.
+
+**Fontes:** [Contas Prefeitura](https://www.canoas.rs.gov.br/contas/), [Dados abertos TCE-RS](https://dados.tce.rs.gov.br/), [API SICONFI](https://apidatalake.tesouro.gov.br/docs/siconfi/), [API PNCP](https://pncp.gov.br/api/consulta/swagger-ui/index.html). Reprodução de DCA: [Prefeituras em Números](https://prefeiturasemnumeros.com.br/municipios/canoas-rs) e [Dados do Brasil](https://dadosdobrasil.com/prefeitura/canoas-rs/).
+
+**Interpretação:** dotação é autorização; empenho não é pagamento; liquidação não é empenho; despesa de capital não é sinônimo de obra; e contrato não comprova execução ou entrega física. Um valor ausente não é tratado como zero. Não se atribui despesa agregada a políticos individualmente sem vinculação documental.
+
 ## Publicação no GitHub Pages
 
 A branch principal é main. Workflow: .github/workflows/deploy.yml. Dispara em push, manualmente e semanalmente.
@@ -57,24 +71,31 @@ Não é necessário instalar bibliotecas extras: o frontend usa HTML, CSS e Java
 
 ## Estrutura
 
-- index.html, styles.css, app.js, favicon.svg: interface.
+- index.html, styles.css, app.js, favicon.svg: interface inicial.
+- financas.html, financas.js, financas.css: painel RREO, contas, investimentos, contratos e obras.
+- dca.js e dca.css: série histórica anual e funções de despesa em 2025.
 - data/politicos.json e data/eleicoes.json: base eleitoral municipal.
 - data/canoas.geojson: geometria provisória; atualizada pelo IBGE no deploy se validada.
 - data/tse-2024.json: enriquecimento de candidaturas e bens; pode permanecer pendente.
 - data/composicao-camara.json: fotografia institucional da Câmara municipal.
+- data/financas-rreo.json: RREO municipal oficial por bimestre e exercício.
+- data/financas-dca.json: DCA 2015–2025 com atribuição de fontes e ressalvas de reprodução secundária.
+- data/contratos-pncp.json: fotografia integral do PNCP (pendente até coleta completa).
+- scripts/sync_pncp.py: consulta pública PNCP por exercício com identificação de órgão e gravação atômica.
 - data/prefeito-2024.json e data/secoes-2024.json: seis candidaturas do 1º turno, duas do 2º turno e eventual coleta TRE validada por zona/seção.
 - data/senadores-rs.json: senadores em exercício pelo RS em outubro de 2026.
 - extras.js, extras.css: telas de exercício municipal e Senado.
 - election-explorer.js, election-explorer.css: análise eleitoral, seções e CSV.
 - scripts/collect_tre.py: coleta detalhada por zona/seção; só publica verificações por total exato.
-- tests/smoke.mjs: verificação em Chromium e screenshots de homologação.
+- tests/smoke.mjs: verificação em Chromium e screenshots de homologação das páginas eleitoral e financeira.
+- tests/test_financas.py: testes de consistência fiscal, DCA e integridade de contratos.
 - scripts/sync_sources.py: pipeline oficial de atualização atômica.
 - tests/test_project.py: testes de integridade e coerência.
 - METODOLOGIA.md: regras e lacunas.
 
 ## Limitações ainda abertas
 
-O portal original integra informações de todos os níveis federativos. Aqui foi implementado o **núcleo eleitoral municipal 2024**, com consulta federal complementar. Não estão concluídos os perfis detalhados dos senadores (a lista dos três senadores do RS está implementada), deputados estaduais, governador, presidente, o histórico de candidaturas anteriores a 2024, a situação efetiva das cadeiras municipais em cada data, nem os indicadores individualizados de presença, votos e despesas municipais.
+O portal original integra informações de todos os níveis federativos. O painel financeiro amplia significativamente o escopo, mas ainda não substitui o TCE-RS, o Tesouro Nacional nem o controle municipal. Aqui foi implementado o **núcleo eleitoral municipal 2024**, com consulta federal complementar. Não estão concluídos os perfis detalhados dos senadores (a lista dos três senadores do RS está implementada), deputados estaduais, governador, presidente, o histórico de candidaturas anteriores a 2024, a situação efetiva das cadeiras municipais em cada data, nem os indicadores individualizados de presença, votos e despesas municipais.
 
 Não foi confirmada API aberta da Câmara Municipal com todas essas métricas; por isso a aplicação não atribui dados por aproximação de nomes nem chama de ausência uma sessão sem lista. Para ampliar a cobertura serão necessárias fontes oficiais, identificadores estáveis e conferência de qualidade. O resultado por zona/seção do TRE é somado por eleitorado e não representa um mapa de origem residencial ou um polígono de bairro.
 
