@@ -1,0 +1,23 @@
+{
+  "uf": "RS",
+  "referencia": "29/10/2026",
+  "fonte": "https://www.congressonacional.leg.br/web/senadores/em-exercicio",
+  "observacao": "Bancada em exercício em 2026. O pleito de 2026 elegeu nomes para mandatos a iniciar em 2027; não confundir eleitos com ocupantes atuais.",
+  "senadores": [
+    {
+      "nome": "Hamilton Mourão",
+      "partido": "REPUBLICANOS",
+      "mandato": "2023–2031"
+    },
+    {
+      "nome": "Luis Carlos Heinze",
+      "partido": "PP",
+      "mandato": "2019–2027"
+    },
+    {
+      "nome": "Paulo Paim",
+      "partido": "PT",
+      "mandato": "2019–2027"
+    }
+  ]
+}
