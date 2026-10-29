@@ -23,10 +23,11 @@ Observatório cívico independente para **Canoas / RS (IBGE 4304606)**, inspirad
 
 **Página específica:** [Orçamento e Obras](https://marcianolima.github.io/politicometro-canoas/financas.html) — `financas.html`.
 
+- **RREO parcial de 2026 (até agosto, 4º bimestre):** quadro especial com arrecadação, previsão, dotação, empenhos, liquidação, pagamento e **grupo de investimentos empenhados**. Os valores são aproximadamente arredondados e reproduzidos de consultas independentes que citam SICONFI como fonte; dados ainda não foram conciliados ao arquivo primário. Não são valores fechados do exercício nem série diretamente aditiva com o RREO consolidado.
 - **RREO consolidado da Prefeitura:** cinco fotografias oficiais de 2024–2025, com receita prevista/realizada, dotação inicial/atualizada, créditos adicionais, despesas empenhadas/liquidadas/pagas e suas razões. Fechamento de 2024 inclui despesa de capital líquida, receita corrente líquida, restos a pagar e aplicação constitucional em Saúde, Educação e FUNDEB. Fonte individual de cada fotografia ligada diretamente ao PDF municipal. Dados não são atualizados em tempo real.
 - **DCA/SICONFI anual (base distinta do RREO):** histórico nominal 2015–2025 de receitas e despesas **exceto intraorçamentárias**, último ano com liquidações e pagamentos; gráfico anual e 19 funções de despesa em 2025. **Status: reprodução secundária da DCA**, de fontes que identificam o SICONFI; conferência direta automática com o Tesouro ainda pendente. As funções de 2025 são arredondadas. Não juntar RREO consolidado e DCA exceto intraorçamentárias na mesma série.
-- **Contratos públicos PNCP:** coleta programada de todas as páginas publicadas no exercício de 2026 pelo CNPJ 88.577.416/0001-18. Dados somente substituídos após todas as janelas e páginas passarem pela verificação. Busca por objeto e fornecedor, filtro de objetos de obras, ordenação, CSV e fonte individual. Estado inicial `aguardando-coleta` até êxito da API.
-- **Projetos e obras:** identificação lexical de objetos relacionados a obras nos contratos PNCP, sem confundir contratação, pagamento, medição física e entrega; encaminhamento à fiscalização TCE-RS. Não existe ainda cadastro consolidado de obras com etapas, geometrias e medições — é lacuna expressa, não substituída por inferências.
+- **Contratos públicos PNCP:** coleta programada de todas as páginas publicadas no exercício de 2026 pelo CNPJ 88.577.416/0001-18. O coletor tenta todas as janelas mensais de 2026 com retentativas. Se uma janela expirar, pode publicar **apenas os meses inteiros previamente concluídos**, com `status: parcial`, período exato, número de meses e aviso de incompletude; jamais apresenta esses contratos como total do ano. Uma fotografia anterior com cobertura mais longa não é substituída por uma mais curta. Busca por objeto e fornecedor, filtro de objetos de obras, ordenação, CSV e fonte individual. Estado inicial `aguardando-coleta` até êxito da API.
+- **Projetos e obras:** identificação lexical de objetos relacionados a obras nos contratos PNCP, sem confundir contratação, pagamento, medição física e entrega; links diretos ao mapa, lista e medições do Licitacon Obras Cidadão do TCE-RS. Não existe ainda cadastro consolidado de obras com etapas, geometrias e medições — é lacuna expressa, não substituída por inferências.
 - **Usabilidade:** página independente responsiva, tabelas e gráficos, acesso pela navegação e CTA da página inicial, exportação CSV, testes Python de integridade, verificação JS e testes Chromium desktop/mobile.
 
 **Fontes:** [Contas Prefeitura](https://www.canoas.rs.gov.br/contas/), [Dados abertos TCE-RS](https://dados.tce.rs.gov.br/), [API SICONFI](https://apidatalake.tesouro.gov.br/docs/siconfi/), [API PNCP](https://pncp.gov.br/api/consulta/swagger-ui/index.html). Reprodução de DCA: [Prefeituras em Números](https://prefeiturasemnumeros.com.br/municipios/canoas-rs) e [Dados do Brasil](https://dadosdobrasil.com/prefeitura/canoas-rs/).
@@ -72,13 +73,14 @@ Não é necessário instalar bibliotecas extras: o frontend usa HTML, CSS e Java
 ## Estrutura
 
 - index.html, styles.css, app.js, favicon.svg: interface inicial.
-- financas.html, financas.js, financas.css: painel RREO, contas, investimentos, contratos e obras.
+- financas.html, financas.js, financas.css, finance-current.js: painel RREO, contas, investimentos, contratos e obras.
 - dca.js e dca.css: série histórica anual e funções de despesa em 2025.
 - data/politicos.json e data/eleicoes.json: base eleitoral municipal.
 - data/canoas.geojson: geometria provisória; atualizada pelo IBGE no deploy se validada.
 - data/tse-2024.json: enriquecimento de candidaturas e bens; pode permanecer pendente.
 - data/composicao-camara.json: fotografia institucional da Câmara municipal.
 - data/financas-rreo.json: RREO municipal oficial por bimestre e exercício.
+- data/financas-2026-referencia.json: recorte 2026 aproximado, não conciliado com o arquivo primário.
 - data/financas-dca.json: DCA 2015–2025 com atribuição de fontes e ressalvas de reprodução secundária.
 - data/contratos-pncp.json: fotografia integral do PNCP (pendente até coleta completa).
 - scripts/sync_pncp.py: consulta pública PNCP por exercício com identificação de órgão e gravação atômica.
