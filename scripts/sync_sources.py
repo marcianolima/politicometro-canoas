@@ -28,7 +28,7 @@ TSE_MUN = "85898"
 API = "https://dadosabertos.tse.jus.br/api/3/action/package_show?id=candidatos-2024"
 MALHA = (
     "https://servicodados.ibge.gov.br/api/v3/malhas/municipios/4304606?"
-    "formato=application/vnd.geo%2Bjson&qualidade=minima"
+    "formato=application/vnd.geo%2Bjson&qualidade=maxima"
 )
 LOG = logging.getLogger("politicometro")
 
