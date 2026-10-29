@@ -1,0 +1,29 @@
+{
+  "municipio": "Canoas",
+  "ibge": "4304606",
+  "uf": "RS",
+  "pleito": 2024,
+  "mandato": "2025–2028",
+  "dataReferencia": "2024-10-27",
+  "fonte": "Tribunal Regional Eleitoral do Rio Grande do Sul / TSE",
+  "primeiroTurno": {
+    "aptos": 259585,
+    "comparecimento": 176956,
+    "abstencao": 82629,
+    "brancosPrefeito": 16588,
+    "nulosPrefeito": 14382,
+    "validosPrefeito": 145986,
+    "validosVereador": 158411,
+    "url": "https://resultados.tre-rs.jus.br/eleicoes/2024/619/RS85898.html"
+  },
+  "segundoTurno": {
+    "aptos": 259585,
+    "comparecimento": 166869,
+    "abstencao": 92716,
+    "brancos": 10434,
+    "nulos": 11229,
+    "airtonSouza": 75688,
+    "jairoJorge": 69518,
+    "url": "https://resultados.tre-rs.jus.br/eleicoes/2024/620/RS85898.html"
+  }
+}
