@@ -1,0 +1,138 @@
+{
+  "municipio": "Canoas",
+  "ibge": "4304606",
+  "ente": "Prefeitura de Canoas, orçamento fiscal e da seguridade social consolidado",
+  "fontePrincipal": "Prefeitura de Canoas — RREO Anexo XIV",
+  "atualizadoManualEm": "2026-10-29",
+  "unidade": "BRL",
+  "definicoes": {
+    "receitas": "Receitas realizadas acumuladas no exercício, como reportadas no RREO; não equivalem a recursos livres para investimento.",
+    "dotacao": "Dotação atualizada é o teto autorizado e pode ser alterada por créditos adicionais; não é gasto realizado.",
+    "empenhadas": "Obrigação orçamentária comprometida, que não indica entrega nem pagamento.",
+    "liquidadas": "Despesa cuja obrigação e execução foram reconhecidas segundo contabilidade pública.",
+    "pagas": "Despesas pagas acumuladas no exercício; não somar novamente aos empenhos ou liquidações.",
+    "capital": "Despesa de capital líquida conforme RREO Anexo XIV, não exclusivamente investimento em obras.",
+    "serie": "Os valores são acumulados desde janeiro até o fechamento do bimestre, não movimentação isolada do bimestre."
+  },
+  "periodos": [
+    {
+      "ano": 2025,
+      "bimestre": 2,
+      "periodo": "Janeiro–abril de 2025",
+      "fim": "2025-04-30",
+      "fonte": "https://www.canoas.rs.gov.br/wp-content/uploads/2025/05/RREO_-_Anexo_14_Simplificado_ConsolidadoRAI_assinado.pdf",
+      "receitas": {
+        "previsaoInicial": 3505347375,
+        "previsaoAtualizada": 3602559121.87,
+        "realizadas": 846486346.31
+      },
+      "despesas": {
+        "dotacaoInicial": 3505347375,
+        "creditosAdicionais": 214443838.08,
+        "dotacaoAtualizada": 3719791213.08,
+        "empenhadas": 1440622525.73,
+        "liquidadas": 752285171.89,
+        "pagas": 709102120.37
+      }
+    },
+    {
+      "ano": 2025,
+      "bimestre": 1,
+      "periodo": "Janeiro–fevereiro de 2025",
+      "fim": "2025-02-28",
+      "fonte": "https://www.canoas.rs.gov.br/wp-content/uploads/2025/03/RREO-Anexo-14-Simplificado-Consolidado-2.pdf",
+      "receitas": {
+        "previsaoInicial": 3505347375,
+        "previsaoAtualizada": 3556178663.09,
+        "realizadas": 440788025.97
+      },
+      "despesas": {
+        "dotacaoInicial": 3505347375,
+        "creditosAdicionais": 155276338.69,
+        "dotacaoAtualizada": 3660623713.69,
+        "empenhadas": 1094686214.08,
+        "liquidadas": 358842142.83,
+        "pagas": 320451910.94
+      }
+    },
+    {
+      "ano": 2024,
+      "bimestre": 6,
+      "periodo": "Janeiro–dezembro de 2024 · exercício encerrado",
+      "fim": "2024-12-31",
+      "fonte": "https://www.canoas.rs.gov.br/wp-content/uploads/2025/03/ANEXO-14-DEMONSTRATIVO-DO-RELATORIO-RESUMIDO-DA-EXECUCAO-ORCAMENTARIA.pdf",
+      "receitas": {
+        "previsaoInicial": 2899153532,
+        "previsaoAtualizada": 4011598273,
+        "realizadas": 2834585104.5
+      },
+      "despesas": {
+        "dotacaoInicial": 2899153532,
+        "creditosAdicionais": 1316502734.59,
+        "dotacaoAtualizada": 4215656266.59,
+        "empenhadas": 2873227271.3,
+        "liquidadas": 2493771598,
+        "pagas": 2420664324.96
+      },
+      "capital": {
+        "despesaCapitalLiquida": 339443194.55,
+        "receitaOperacoesCredito": 49279159.16,
+        "nota": "Despesa de capital líquida do Anexo XIV. Não representa exclusivamente investimento em obras."
+      },
+      "responsabilidadeFiscal": {
+        "receitaCorrenteLiquida": 2375941725.74,
+        "restosAPagarSaldo": 43713269.8,
+        "resultadoPrimario": 107485909.15,
+        "resultadoNominal": 216862243.68
+      },
+      "aplicacoesVinculadas": {
+        "saudePercentual": 16.49,
+        "saudeMinimoPercentual": 15,
+        "educacaoPercentual": 26.54,
+        "educacaoMinimoPercentual": 25,
+        "fundebMagisterioPercentual": 76.6,
+        "fundebMinimoPercentual": 70
+      }
+    },
+    {
+      "ano": 2024,
+      "bimestre": 5,
+      "periodo": "Janeiro–outubro de 2024",
+      "fim": "2024-10-31",
+      "fonte": "https://www.canoas.rs.gov.br/wp-content/uploads/2024/11/ANEXO-14-RELATORIO-RESUMIDO-DA-EXECUCAO-ORCAMENTARIA-CONSOLIDADO.pdf",
+      "receitas": {
+        "previsaoInicial": 2899153532,
+        "previsaoAtualizada": 3955418339.77,
+        "realizadas": 2276712370.48
+      },
+      "despesas": {
+        "dotacaoInicial": 2899153532,
+        "creditosAdicionais": 1238691473.74,
+        "dotacaoAtualizada": 4137845005.74,
+        "empenhadas": 2651459974.04,
+        "liquidadas": 1908998277.28,
+        "pagas": 1856390013.08
+      }
+    },
+    {
+      "ano": 2024,
+      "bimestre": 3,
+      "periodo": "Janeiro–junho de 2024",
+      "fim": "2024-06-30",
+      "fonte": "https://www.canoas.rs.gov.br/wp-content/uploads/2024/07/RREO-Anexo-14-Simplificado-Consolidado.pdf",
+      "receitas": {
+        "previsaoInicial": 2899153532,
+        "previsaoAtualizada": 3292359683.75,
+        "realizadas": 1172845547.22
+      },
+      "despesas": {
+        "dotacaoInicial": 2899153532,
+        "creditosAdicionais": 523035915.29,
+        "dotacaoAtualizada": 3422189447.29,
+        "empenhadas": 1605471558.66,
+        "liquidadas": 968554028.86,
+        "pagas": 916634220.71
+      }
+    }
+  ]
+}
