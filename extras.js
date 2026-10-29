@@ -6,13 +6,10 @@
  async function council(){
   const node=document.querySelector("#currentCouncil");if(!node)return;
   try{
-   const [snapshot,original]=await Promise.all([load("data/composicao-camara.json"),load("data/politicos.json")]);
+   const snapshot=await load("data/composicao-camara.json");
    if(snapshot.municipioIbge!=="4304606"||!Array.isArray(snapshot.vereadores)||snapshot.vereadores.length!==21)throw Error("Fotografia institucional não validada");
-   const people=original.filter(p=>p.cargo==="Vereador");
    node.innerHTML=snapshot.vereadores.map(name=>{
-    const token=normalize(name);
-    const originalElect=people.find(p=>normalize(p.nome)===token||normalize(p.nomeCompleto)===token);
-    const note=originalElect?"Também listado entre os eleitos de 2024":"Exercício ou suplência: consulte a Câmara";
+    const note="Relação institucional consultada";
     return '<div class="council-member"><span class="roster-dot" aria-hidden="true"></span><span><strong>'+escape(name)+'</strong><small>'+escape(note)+'</small></span></div>'
    }).join("");
   }catch(error){node.innerHTML='<p class="roster-error">Composição institucional indisponível. Consulte a relação diretamente na Câmara.</p>'}
