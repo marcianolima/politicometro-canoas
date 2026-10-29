@@ -36,24 +36,29 @@ jobs:
           node --check app.js
           node --check extras.js
           node --check election-explorer.js
-          python -m py_compile scripts/sync_sources.py scripts/collect_tre.py
+          node --check financas.js
+          python -m py_compile scripts/sync_sources.py scripts/collect_tre.py scripts/sync_pncp.py
           python -m unittest discover -s tests -v
       - name: Atualizar fontes públicas oficiais
         run: |
           python scripts/sync_sources.py
           python scripts/collect_tre.py
+          python scripts/sync_pncp.py
       - name: Validar fotografia atualizada
         run: python -m unittest discover -s tests -v
       - name: Montar site estático
         shell: bash
         run: |
           mkdir -p site/data
-          cp index.html app.js extras.js election-explorer.js styles.css extras.css election-explorer.css favicon.svg .nojekyll site/
-          cp data/politicos.json data/eleicoes.json data/composicao-camara.json data/senadores-rs.json data/prefeito-2024.json data/secoes-2024.json data/canoas.geojson data/tse-2024.json site/data/
+          cp index.html financas.html app.js extras.js election-explorer.js financas.js styles.css extras.css election-explorer.css financas.css favicon.svg .nojekyll site/
+          cp data/politicos.json data/eleicoes.json data/composicao-camara.json data/senadores-rs.json data/prefeito-2024.json data/secoes-2024.json data/financas-rreo.json data/contratos-pncp.json data/canoas.geojson data/tse-2024.json site/data/
           test -s site/data/politicos.json
           test -s site/data/canoas.geojson
           test -s site/data/prefeito-2024.json
           test -s site/data/secoes-2024.json
+          test -s site/data/financas-rreo.json
+          test -s site/data/contratos-pncp.json
+          test -s site/financas.html
       - name: Instalar Chromium para smoke tests reais
         run: |
           npm install --no-save playwright@1.56.1
