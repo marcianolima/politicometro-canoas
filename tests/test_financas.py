@@ -62,6 +62,27 @@ class FinanceTests(unittest.TestCase):
                 self.assertTrue(contract["fonte"].startswith("https://pncp.gov.br/"))
                 self.assertTrue(contract["objeto"])
 
+    def test_dca_annual_separate_from_rreo(self):
+        data=read("financas-dca.json")
+        self.assertEqual(data["municipioIbge"],"4304606")
+        self.assertIn("intraorçamentárias",data["escopo"])
+        self.assertEqual(data["status"],"reproducao-secundaria-pendente-conciliacao-direta")
+        self.assertEqual([row["ano"] for row in data["anuais"]],list(range(2015,2026)))
+        self.assertEqual(len(data["funcoes2025"]),19)
+        for p in data["anuais"]:
+            self.assertAlmostEqual(p["resultado"],p["receitaRealizada"]-p["despesaEmpenhada"],places=2)
+            self.assertGreater(p["receitaRealizada"],0)
+            self.assertGreater(p["despesaEmpenhada"],0)
+        y25=data["anuais"][-1]
+        self.assertAlmostEqual(y25["receitaRealizada"],2592407674.90,places=2)
+        self.assertAlmostEqual(y25["despesaEmpenhada"],2699399163.23,places=2)
+        self.assertAlmostEqual(y25["despesaLiquidada"],2455324934.20,places=2)
+        self.assertAlmostEqual(y25["despesaPaga"],2279083240.29,places=2)
+        self.assertGreater(y25["despesaEmpenhada"],y25["despesaLiquidada"])
+        self.assertGreater(y25["despesaLiquidada"],y25["despesaPaga"])
+        self.assertTrue(any("SICONFI" in f["tipo"] or "SICONFI" in f["url"] for f in data["fontes"]))
+        self.assertNotAlmostEqual(y25["receitaRealizada"],next(x for x in read("financas-rreo.json")["periodos"] if x["fim"]=="2024-12-31")["receitas"]["realizadas"])
+
     def test_contract_parser_validation(self):
         spec=importlib.util.spec_from_file_location("sync_pncp",ROOT/"scripts"/"sync_pncp.py")
         module=importlib.util.module_from_spec(spec)
@@ -88,7 +109,7 @@ class FinanceTests(unittest.TestCase):
         page=(ROOT/"financas.html").read_text(encoding="utf-8")
         js=(ROOT/"financas.js").read_text(encoding="utf-8")
         home=(ROOT/"index.html").read_text(encoding="utf-8")
-        for file in ("financas.html","financas.css","financas.js"):
+        for file in ("financas.html","financas.css","financas.js","dca.js","dca.css"):
             self.assertTrue((ROOT/file).is_file())
         self.assertIn("financas.html",home)
         ids=re.findall(r'\bid="([^"]+)"',page)
@@ -97,6 +118,8 @@ class FinanceTests(unittest.TestCase):
             self.assertIn(target,ids)
         self.assertIn("financas-rreo.json",js)
         self.assertIn("contratos-pncp.json",js)
+        self.assertIn("financas-dca.json",(ROOT/"dca.js").read_text(encoding="utf-8"))
+        self.assertIn('id="contas-anuais"',page)
         self.assertNotIn("Math.random",js)
         self.assertIn("não",page.lower())
 
