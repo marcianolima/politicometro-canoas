@@ -4,7 +4,7 @@
   const fmt = new Intl.NumberFormat("pt-BR", {style:"currency",currency:"BRL"});
   const nf = new Intl.NumberFormat("pt-BR");
   const pct = new Intl.NumberFormat("pt-BR",{maximumFractionDigits:1});
-  const worksExpression = /\b(obra|obras|constru|pavimenta|asfalt|drenag|reforma|restaura|requalifica|urbaniza|recupera.{0,18}(via|rua|avenida|pr[eé]dio|ponte)|saneamento|infraestrutura|edifica|conten[cç][aã]o|ponte|viaduto|desassoreamento|conten[cç][aã]o|rede pluvial)\b/i;
+  const worksExpression = /(?:\bobras?\b|construc|paviment|asfalt|drenag|reform|restaur|requalific|urbaniz|recuperac|saneament|infraestrut|edific|contenc|\bponte\b|viaduto|desassore|rede pluvial)/i;
   const state = {fiscal:null,selected:null,pncp:null,contracts:[],filtered:[],page:1,year:"2024"};
   const compact = (v) => {
     if (!Number.isFinite(v)) return "Não disponível";
