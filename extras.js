@@ -19,7 +19,7 @@
   try{
    const snapshot=await load("data/senadores-rs.json");
    if(snapshot.uf!=="RS"||!Array.isArray(snapshot.senadores)||snapshot.senadores.length!==3)throw Error("Bancada incompleta");
-   node.innerHTML=snapshot.senadores.map(s=>'<article class="senator-card"><div class="senator-avatar" aria-hidden="true">◎</div><p class="senator-label">SENADO FEDERAL · RS</p><h3>'+escape(s.nome)+'</h3><div class="senator-badges"><span>'+escape(s.partido)+'</span><span>'+escape(s.mandato)+'</span></div><a href="https://www.congressonacional.leg.br/web/senadores/em-exercicio" target="_blank" rel="noopener noreferrer">Conferir dados oficiais ↗</a></article>').join("");
+   node.innerHTML=snapshot.senadores.map(s=>'<article class="senator-card"><div class="senator-avatar" aria-hidden="true">◎</div><p class="senator-label">SENADO FEDERAL · RS</p><h3>'+escape(s.nome)+'</h3><div class="senator-badges"><span>'+escape(s.partido)+'</span><span>'+escape(s.mandato)+'</span></div><a href="'+escape(s.perfil||"https://www.congressonacional.leg.br/web/senadores/em-exercicio")+'" target="_blank" rel="noopener noreferrer">Ver perfil no Senado ↗</a></article>').join("");
   }catch(error){node.innerHTML='<div class="roster-error">Bancada não carregada. Consulte o site do Senado Federal.</div>'}
  }
  document.addEventListener("DOMContentLoaded",()=>{council();senate()});
