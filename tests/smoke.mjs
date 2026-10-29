@@ -56,10 +56,10 @@ async function financeOne(label,viewport){
  await page.locator("#current2026Metrics .fiscal-metric").first().waitFor({timeout:20000});
  assert.equal(await page.locator("#current2026Metrics .fiscal-metric").count(),7,"sete indicadores de 2026");
  assert.match(await page.locator("#current2026Notice").innerText(),/aproximados|aproximad/i,"RREO 2026 aprox. explicitado");
- await page.locator(".fiscal-metric").first().waitFor({timeout:20000});
- assert.equal(await page.locator(".fiscal-metric").count(),6,"6 indicadores fiscais");
+ await page.locator("#fiscalMetrics .fiscal-metric").first().waitFor({timeout:20000});
+ assert.equal(await page.locator("#fiscalMetrics .fiscal-metric").count(),6,"6 indicadores fiscais");
  assert.equal(await page.locator("#periodSelect").inputValue(),"2024-12-31","fechamento anual padrão");
- assert.match(await page.locator(".fiscal-metric").nth(1).innerText(),/2,8/,"receita 2024");
+ assert.match(await page.locator("#fiscalMetrics .fiscal-metric").nth(1).innerText(),/2,8/,"receita 2024");
  assert.match(await page.locator("#capitalTotal").innerText(),/339/,"despesa de capital RREO");
  assert.equal(await page.locator("#historyPlot .history-group").count(),3,"três recortes 2024");
  await page.locator("#dcaSummary .fiscal-metric").first().waitFor({timeout:20000});
