@@ -79,8 +79,48 @@ class TestPoliticalRecords(unittest.TestCase):
         self.assertEqual(len(senate["senadores"]), 3)
         self.assertEqual(len({x["nome"] for x in senate["senadores"]}), 3)
 
+    def test_mayoral_rounds(self):
+        mayor=load("prefeito-2024.json")
+        self.assertEqual(mayor["municipioIbge"],"4304606")
+        self.assertEqual(len(mayor["primeiroTurno"]),6)
+        self.assertEqual(len(mayor["segundoTurno"]),2)
+        self.assertEqual(sum(x["votos"] for x in mayor["primeiroTurno"]),145986)
+        self.assertEqual(sum(x["votos"] for x in mayor["segundoTurno"]),145206)
+        self.assertEqual(next(x for x in mayor["segundoTurno"] if x["numero"]=="22")["votos"],75688)
+        for c in mayor["primeiroTurno"]+mayor["segundoTurno"]:
+            self.assertTrue(c["numero"].isdigit())
+
+    def test_sections_snapshot_integrity(self):
+        snapshot=load("secoes-2024.json")
+        self.assertEqual(snapshot["municipioIbge"],"4304606")
+        self.assertIn(snapshot["status"],("pendente","parcial","verificado"))
+        elected=load("politicos.json")
+        mayor=load("prefeito-2024.json")
+        expected={p["id"]:p["votos"] for p in elected if p["cargo"]=="Vereador"}
+        expected.update({p["id"]:p["votos"] for p in mayor["primeiroTurno"]+mayor["segundoTurno"]})
+        for id,record in snapshot.get("candidatos",{}).items():
+            self.assertIn(id,expected)
+            self.assertEqual(record["total"],expected[id])
+            self.assertEqual(sum(z["votos"] for z in record["zonas"]),record["total"])
+            for zone in record["zonas"]:
+                self.assertEqual(sum(section["votos"] for section in zone["secoes"]),zone["votos"])
+                self.assertEqual(len({s["secao"] for s in zone["secoes"]}),len(zone["secoes"]))
+                self.assertIn(zone["zona"],(66,134))
+
+    def test_tre_html_parser_synthetic(self):
+        import importlib.util
+        spec=importlib.util.spec_from_file_location("collect_tre",ROOT/"scripts"/"collect_tre.py")
+        mod=importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(mod)
+        sample="<h4>Zona 66 (5 votos)</h4><a>1 ( 2 )</a><a>2 ( 3 )</a><h4>Zona 134 (6 votos)</h4><a>3 ( 6 )</a>"
+        zones=mod.extract(sample)
+        self.assertEqual([z["votos"] for z in zones],[5,6])
+        self.assertEqual(zones[0]["secoes"][0],{"secao":1,"votos":2})
+        with self.assertRaises(ValueError):
+            mod.extract(sample.replace("2 ( 3 )","2 ( 4 )"))
+
     def test_site_assets_and_neutrality(self):
-        for name in ("index.html", "styles.css", "app.js", "extras.js", "extras.css", "favicon.svg"):
+        for name in ("index.html", "styles.css", "app.js", "extras.js", "extras.css", "election-explorer.js", "election-explorer.css", "favicon.svg"):
             self.assertTrue((ROOT / name).is_file(), name)
         html = (ROOT / "index.html").read_text(encoding="utf-8")
         script = (ROOT / "app.js").read_text(encoding="utf-8")
@@ -89,6 +129,7 @@ class TestPoliticalRecords(unittest.TestCase):
         self.assertIn('id="modal"', html)
         self.assertIn('id="exercicio"', html)
         self.assertIn('id="senado"', html)
+        self.assertIn('id="analise-eleitoral"', html)
         self.assertIn("Não disponível", script)
         self.assertNotIn("nota de desempenho", html.lower())
         self.assertIn("sem", html.lower())
