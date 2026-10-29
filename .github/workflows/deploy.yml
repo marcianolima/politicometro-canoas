@@ -61,6 +61,8 @@ jobs:
       - name: Validar interface desktop/mobile em Chromium
         run: |
           python -m http.server 8765 --bind 127.0.0.1 --directory site >/tmp/politicometro-http.log 2>&1 &
+          for attempt in $(seq 1 30); do curl -fsS http://127.0.0.1:8765/ >/dev/null && break || sleep 1; done
+          curl -fIsS http://127.0.0.1:8765/ >/dev/null
           node tests/smoke.mjs
       - name: Armazenar screenshots de homologação
         if: always()
