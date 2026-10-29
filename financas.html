@@ -10,6 +10,7 @@
 <link rel="stylesheet" href="dca.css">
 <script src="financas.js" defer></script>
 <script src="dca.js" defer></script>
+<script src="finance-current.js" defer></script>
 </head><body class="finance-body">
 <a class="skip" href="#main">Pular para o conteúdo</a>
 <header class="site-header"><div class="container nav-wrap">
@@ -23,7 +24,8 @@
 <p>Orçamento, arrecadação, gastos, investimentos e contratos de Canoas — organizados para você acompanhar o que foi autorizado, comprometido e efetivamente pago.</p>
 <div class="finance-hero-pills"><span>Fontes oficiais</span><span>Valores auditáveis</span><span>Sem comparações enganosas</span></div>
 </div><div class="finance-hero-aside"><span class="aside-eyebrow">EXERCÍCIO E RECORTE</span><strong>Prefeitura de Canoas</strong><p>Orçamento fiscal e da seguridade social consolidado. Séries bimestrais oficiais; contratos PNCP analisados separadamente.</p><a href="#metodologia-financeira">Entenda como calculamos ↗</a></div></div></section>
-<nav class="finance-subnav" aria-label="Seções de finanças"><div class="container"><a href="#painel">Painel fiscal</a><a href="#execucao">Execução</a><a href="#contas-anuais">Histórico</a><a href="#investimentos">Investimentos</a><a href="#contratacoes">Contratos</a><a href="#obras">Projetos e obras</a><a href="#metodologia-financeira">Fontes</a></div></nav>
+<nav class="finance-subnav" aria-label="Seções de finanças"><div class="container"><a href="#atual-2026">Atual 2026</a><a href="#painel">RREO histórico</a><a href="#execucao">Execução</a><a href="#contas-anuais">Histórico</a><a href="#investimentos">Investimentos</a><a href="#contratacoes">Contratos</a><a href="#obras">Projetos e obras</a><a href="#metodologia-financeira">Fontes</a></div></nav>
+<section class="container finance-section" id="atual-2026"><div class="finance-heading"><div><p class="overline dark">EXECUÇÃO DO EXERCÍCIO CORRENTE · 2026</p><h2>Como está 2026 até agosto.</h2></div><p class="finance-muted">4º bimestre de 2026: dados acumulados de janeiro a agosto, arredondados e reproduzidos do RREO/SICONFI. Não é encerramento anual.</p></div><div id="current2026Notice" class="finance-note finance-partial" role="status" aria-live="polite">Carregando referência de 2026...</div><div id="current2026Metrics" class="finance-metrics"><p class="finance-muted">Carregando dados...</p></div><div class="finance-section-actions"><a class="finance-text-link" href="https://prefeiturasemnumeros.com.br/municipios/canoas-rs" target="_blank" rel="noopener noreferrer">Reprodução do RREO 2026 ↗</a><a class="finance-text-link" href="https://apidatalake.tesouro.gov.br/docs/siconfi/" target="_blank" rel="noopener noreferrer">Fonte primária: Tesouro/SICONFI ↗</a></div><p class="fine">O grupo de natureza de despesa <strong>Investimentos</strong> indica empenhos, que podem incluir obras, equipamentos e outras aquisições de capital. Não comprova pagamento, avanço físico ou obra entregue.</p></section>
 <section class="container finance-section" id="painel" aria-labelledby="fiscal-title">
 <div class="finance-heading"><div><p class="overline dark">VISÃO GERAL</p><h2 id="fiscal-title">O orçamento em números.</h2><p class="finance-muted">Valores nominais em reais; exercício e período explicitados na origem.</p></div><div class="period-control"><label for="periodSelect">Demonstrativo RREO</label><select id="periodSelect" aria-label="Período do RREO"></select></div></div>
 <div class="finance-note" id="periodNotice" role="status" aria-live="polite">Carregando demonstrativos oficiais...</div>
