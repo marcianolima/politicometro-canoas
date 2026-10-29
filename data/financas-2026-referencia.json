@@ -1,0 +1,33 @@
+{
+  "municipioIbge": "4304606",
+  "ano": 2026,
+  "bimestre": 4,
+  "ate": "2026-08-31",
+  "referencia": "Janeiro–agosto de 2026",
+  "status": "estimativa-arredondada-de-reproducao-secundaria-siconfi",
+  "observacao": "Indicadores aproximados e parciais reproduzidos de consultas que referenciam o SICONFI RREO Anexo 1. Ainda não houve conciliação de valores exatos contra o arquivo original. A série distingue receitas líquidas e despesas sem intraorçamentárias, diferente do RREO municipal consolidado.",
+  "aproximado": true,
+  "receitaPrevista": 3730000000,
+  "receitaRealizada": 1810000000,
+  "dotacaoAtualizada": 3960000000,
+  "despesaEmpenhada": 2340000000,
+  "despesaLiquidada": 1660000000,
+  "despesaPaga": 1480000000,
+  "investimentosEmpenhados": 125280000,
+  "investimentosDescricao": "Grupo de natureza de despesa Investimentos, empenhado, NÃO pagamentos nem obras concluídas",
+  "fontes": [
+    {
+      "url": "https://prefeiturasemnumeros.com.br/municipios/canoas-rs",
+      "tipo": "reprodução secundária do SICONFI 4º bimestre 2026"
+    },
+    {
+      "url": "https://canoas.cidades.io/pt/contas-da-prefeitura",
+      "tipo": "reprodução secundária: arrecadação, execução, grupo investimentos"
+    },
+    {
+      "url": "https://apidatalake.tesouro.gov.br/docs/siconfi/",
+      "tipo": "documentação da fonte primária para futura conciliação"
+    }
+  ],
+  "metodologia": "Valores arredondados para apresentação, acumulados janeiro–agosto. Não permitem calcular resultado fiscal conclusivo nem atribuir despesas a indivíduos."
+}
