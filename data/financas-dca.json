@@ -1,0 +1,171 @@
+{
+  "municipioIbge": "4304606",
+  "tipo": "SICONFI DCA Anexos I-C e I-E",
+  "escopo": "Despesas e receitas exceto intraorçamentárias, com deduções de receita quando aplicáveis",
+  "valor": "nominal",
+  "status": "reproducao-secundaria-pendente-conciliacao-direta",
+  "atualizadoEm": "2026-10-29",
+  "fontes": [
+    {
+      "tipo": "fonte primária, API/documentação",
+      "url": "https://apidatalake.tesouro.gov.br/docs/siconfi/"
+    },
+    {
+      "tipo": "reprodução tabular DCA e decomposição receita",
+      "url": "https://prefeiturasemnumeros.com.br/municipios/canoas-rs"
+    },
+    {
+      "tipo": "reprodução por função em 2025",
+      "url": "https://dadosdobrasil.com/prefeitura/canoas-rs/"
+    }
+  ],
+  "nota": "Valores anuais da DCA exceto intraorçamentárias, diferentes dos totais do RREO consolidado. Reproduzidos de páginas secundárias que identificam SICONFI como origem; ainda não cotejados automaticamente com a API primária. Funções em 2025 arredondadas em R$ 0,1 milhão; não somar valores arredondados para conferir total oficial.",
+  "anuais": [
+    {
+      "ano": 2015,
+      "receitaRealizada": 1250958412.32,
+      "despesaEmpenhada": 1196946459.64,
+      "resultado": 54011952.68
+    },
+    {
+      "ano": 2016,
+      "receitaRealizada": 1368764999.01,
+      "despesaEmpenhada": 1422164444.32,
+      "resultado": -53399445.31
+    },
+    {
+      "ano": 2017,
+      "receitaRealizada": 1391981091.23,
+      "despesaEmpenhada": 1334132456.36,
+      "resultado": 57848634.87
+    },
+    {
+      "ano": 2018,
+      "receitaRealizada": 1482554839.97,
+      "despesaEmpenhada": 1403354567.67,
+      "resultado": 79200272.3
+    },
+    {
+      "ano": 2019,
+      "receitaRealizada": 1621311203.82,
+      "despesaEmpenhada": 1609174053.39,
+      "resultado": 12137150.43
+    },
+    {
+      "ano": 2020,
+      "receitaRealizada": 1751762398.47,
+      "despesaEmpenhada": 1697171046.12,
+      "resultado": 54591352.35
+    },
+    {
+      "ano": 2021,
+      "receitaRealizada": 1980066094.24,
+      "despesaEmpenhada": 1794790423.45,
+      "resultado": 185275670.79
+    },
+    {
+      "ano": 2022,
+      "receitaRealizada": 2129161460.76,
+      "despesaEmpenhada": 2128182523.95,
+      "resultado": 978936.81
+    },
+    {
+      "ano": 2023,
+      "receitaRealizada": 1976495044.57,
+      "despesaEmpenhada": 2417774293.51,
+      "resultado": -441279248.94
+    },
+    {
+      "ano": 2024,
+      "receitaRealizada": 2706540365,
+      "despesaEmpenhada": 2746327810.36,
+      "resultado": -39787445.36
+    },
+    {
+      "ano": 2025,
+      "receitaRealizada": 2592407674.9,
+      "despesaEmpenhada": 2699399163.23,
+      "resultado": -106991488.33,
+      "despesaLiquidada": 2455324934.2,
+      "despesaPaga": 2279083240.29
+    }
+  ],
+  "funcoes2025": [
+    {
+      "funcao": "Saúde",
+      "empenhadoAproximado": 711400000
+    },
+    {
+      "funcao": "Educação",
+      "empenhadoAproximado": 525100000
+    },
+    {
+      "funcao": "Previdência Social",
+      "empenhadoAproximado": 407900000
+    },
+    {
+      "funcao": "Administração",
+      "empenhadoAproximado": 350800000
+    },
+    {
+      "funcao": "Urbanismo",
+      "empenhadoAproximado": 189300000
+    },
+    {
+      "funcao": "Encargos Especiais",
+      "empenhadoAproximado": 107300000
+    },
+    {
+      "funcao": "Transporte",
+      "empenhadoAproximado": 80400000
+    },
+    {
+      "funcao": "Gestão Ambiental",
+      "empenhadoAproximado": 77400000
+    },
+    {
+      "funcao": "Saneamento",
+      "empenhadoAproximado": 63000000
+    },
+    {
+      "funcao": "Legislativa",
+      "empenhadoAproximado": 52500000
+    },
+    {
+      "funcao": "Trabalho",
+      "empenhadoAproximado": 46700000
+    },
+    {
+      "funcao": "Assistência Social",
+      "empenhadoAproximado": 44800000
+    },
+    {
+      "funcao": "Segurança Pública",
+      "empenhadoAproximado": 16400000
+    },
+    {
+      "funcao": "Desporto e Lazer",
+      "empenhadoAproximado": 14000000
+    },
+    {
+      "funcao": "Habitação",
+      "empenhadoAproximado": 6600000
+    },
+    {
+      "funcao": "Direitos da Cidadania",
+      "empenhadoAproximado": 3700000
+    },
+    {
+      "funcao": "Cultura",
+      "empenhadoAproximado": 2400000
+    },
+    {
+      "funcao": "Indústria",
+      "empenhadoAproximado": 29800
+    },
+    {
+      "funcao": "Comércio e Serviços",
+      "empenhadoAproximado": 23700
+    }
+  ]
+}
