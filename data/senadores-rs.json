@@ -7,17 +7,23 @@
     {
       "nome": "Hamilton Mourão",
       "partido": "REPUBLICANOS",
-      "mandato": "2023–2031"
+      "mandato": "2023–2031",
+      "idSenado": 6341,
+      "perfil": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/6341"
     },
     {
       "nome": "Luis Carlos Heinze",
       "partido": "PP",
-      "mandato": "2019–2027"
+      "mandato": "2019–2027",
+      "idSenado": 1186,
+      "perfil": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/1186"
     },
     {
       "nome": "Paulo Paim",
       "partido": "PT",
-      "mandato": "2019–2027"
+      "mandato": "2019–2027",
+      "idSenado": 825,
+      "perfil": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/825"
     }
   ]
 }
