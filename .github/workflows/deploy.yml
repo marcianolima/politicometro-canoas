@@ -34,6 +34,7 @@ jobs:
       - name: Testar fonte e base eleitoral
         run: |
           node --check app.js
+          node --check extras.js
           python -m unittest discover -s tests -v
       - name: Atualizar fontes públicas oficiais
         run: python scripts/sync_sources.py
@@ -43,8 +44,8 @@ jobs:
         shell: bash
         run: |
           mkdir -p site/data
-          cp index.html app.js styles.css favicon.svg .nojekyll site/
-          cp data/politicos.json data/eleicoes.json data/canoas.geojson data/tse-2024.json site/data/
+          cp index.html app.js extras.js styles.css extras.css favicon.svg .nojekyll site/
+          cp data/politicos.json data/eleicoes.json data/composicao-camara.json data/senadores-rs.json data/canoas.geojson data/tse-2024.json site/data/
           test -s site/data/politicos.json
           test -s site/data/canoas.geojson
       - name: Configurar GitHub Pages
