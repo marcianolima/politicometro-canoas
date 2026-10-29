@@ -1,0 +1,65 @@
+{
+  "municipioIbge": "4304606",
+  "pleito": 2024,
+  "fonte": "https://resultados.tre-rs.jus.br/eleicoes/2024/619/RS85898.html",
+  "primeiroTurno": [
+    {
+      "id": "pref1-airton",
+      "nome": "Airton Souza",
+      "numero": "22",
+      "partido": "PL",
+      "votos": 51472
+    },
+    {
+      "id": "pref1-jairo",
+      "nome": "Jairo Jorge",
+      "numero": "55",
+      "partido": "PSD",
+      "votos": 43442
+    },
+    {
+      "id": "pref1-campiol",
+      "nome": "Campiol",
+      "numero": "30",
+      "partido": "NOVO",
+      "votos": 18814
+    },
+    {
+      "id": "pref1-lucia",
+      "nome": "Lúcia Colombo",
+      "numero": "10",
+      "partido": "REPUBLICANOS",
+      "votos": 15313
+    },
+    {
+      "id": "pref1-marcio",
+      "nome": "Márcio Prado",
+      "numero": "25",
+      "partido": "PRD",
+      "votos": 10121
+    },
+    {
+      "id": "pref1-almiro",
+      "nome": "Almiro Gehrat",
+      "numero": "50",
+      "partido": "PSOL",
+      "votos": 6824
+    }
+  ],
+  "segundoTurno": [
+    {
+      "id": "airton-souza",
+      "nome": "Airton Souza",
+      "numero": "22",
+      "partido": "PL",
+      "votos": 75688
+    },
+    {
+      "id": "pref2-jairo",
+      "nome": "Jairo Jorge",
+      "numero": "55",
+      "partido": "PSD",
+      "votos": 69518
+    }
+  ]
+}
