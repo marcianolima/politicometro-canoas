@@ -59,7 +59,7 @@ function detailGrid(p){
 const unavailable="O indicador individual não está disponível nesta base. A falta de dados publicados não deve ser interpretada como zero, como ausência ou como inexistência de atividade.";
 function municipalTab(p,tab){
  const v=state.tse?.candidatos?.[p.id];
- if(tab==="resumo")return '<div class="profile-panel">'+detailGrid(p)+'<h3>Sobre a candidatura</h3><p>'+esc(p.nomeCompleto)+' integra a lista de eleitos de Canoas em 2024. A situação efetiva em exercício depende de validação junto à Câmara ou à Prefeitura.</p>'+sourceLinks(p)+'</div>';
+ if(tab==="resumo"){const v=state.tse?.candidatos?.[p.id];const details=v?'<h3>Informações declaradas ao TSE</h3><dl class="detail-grid"><div><dt>Ocupação declarada</dt><dd>'+esc(v.ocupacao||"Não disponível")+'</dd></div><div><dt>Escolaridade declarada</dt><dd>'+esc(v.instrucao||"Não disponível")+'</dd></div></dl>':"";return '<div class="profile-panel">'+detailGrid(p)+details+'<h3>Sobre a candidatura</h3><p>'+esc(p.nomeCompleto)+' integra a lista de eleitos de Canoas em 2024. A situação efetiva em exercício depende de validação junto à Câmara ou à Prefeitura.</p>'+sourceLinks(p)+'</div>'}
  if(tab==="eleicao")return '<div class="profile-panel">'+detailGrid(p)+'<h3>Como interpretar os votos</h3><p>Vereadores: votos nominais do 1º turno. Prefeito: votos do 2º turno. Vice-prefeito: eleito na mesma chapa majoritária, sem votos individualizados.</p>'+sourceLinks(p)+'</div>';
  if(tab==="bens"){
   let content='<div class="unavailable">'+unavailable+' Não é possível inferir bens inexistentes a partir de uma declaração ausente.</div>';
@@ -139,7 +139,7 @@ async function boot(){
   const parties=[...new Set(list.map(x=>x.partido))].sort((a,b)=>a.localeCompare(b,"pt-BR"));
   $("#party").innerHTML='<option value="">Todos os partidos</option>'+parties.map(x=>'<option value="'+esc(x)+'">'+esc(x)+'</option>').join("");
   changeRole("todos");
-  const direct=new URL(location.href).searchParams.get("p");if(direct&&!direct.startsWith("dep-"))openProfile(direct,"municipal",false);
+  const direct=new URL(location.href).searchParams.get("p");if(direct&&!direct.startsWith("dep-"))openProfile(direct,"municipal",false);else if(direct?.startsWith("dep-"))loadDeputies();
  }catch(e){$("#resultsCount").textContent="Não foi possível carregar a base eleitoral";$("#people").innerHTML='<div class="empty">Erro na base: '+esc(e.message)+'</div>'}
  try{const tse=await json("data/tse-2024.json");state.tse=tse;$("#freshness").textContent=tse.status==="verificado"?"TSE conciliado em "+new Date(tse.coletadoEm).toLocaleDateString("pt-BR")+" ("+Object.keys(tse.candidatos||{}).length+" fichas).":"Enriquecimento TSE pendente; a base de resultados eleitorais permanece consultável."}catch{$("#freshness").textContent="Enriquecimento TSE indisponível."}
 }
