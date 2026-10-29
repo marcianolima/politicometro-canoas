@@ -60,7 +60,10 @@ def extract(record):
     obj=clean(record.get("objetoContrato"),1200)
     if not obj:raise ValueError("Objeto contratual vazio")
     provider=clean(record.get("nomeRazaoSocialFornecedor"),200)
-    url=f"https://pncp.gov.br/app/contratos/{token}"
+    pncp_match=re.fullmatch(r"([0-9]{14})-([0-9]{1,6})-([0-9]{1,6})/([0-9]{4})",token)
+    pncp_year=int(pncp_match.group(4))
+    pncp_seq=int(pncp_match.group(3))
+    url=f"https://pncp.gov.br/api/consulta/v1/orgaos/{CNPJ}/contratos/{pncp_year}/{pncp_seq}"
     return {"id":token,"ano":year,"sequencial":seq,
             "numero":clean(record.get("numeroContratoEmpenho"),70),
             "objeto":obj,"valor":value,
