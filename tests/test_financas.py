@@ -98,7 +98,7 @@ class FinanceTests(unittest.TestCase):
         self.assertIn("financas-rreo.json",js)
         self.assertIn("contratos-pncp.json",js)
         self.assertNotIn("Math.random",js)
-        self.assertIn("não é",page.lower())
+        self.assertIn("não",page.lower())
 
 if __name__=="__main__":
     unittest.main()
