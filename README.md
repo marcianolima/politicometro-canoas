@@ -13,6 +13,8 @@ Observatório cívico independente para **Canoas / RS (IBGE 4304606)**, inspirad
 - Cartografia SVG a partir de GeoJSON. A geometria inicialmente versionada é **muito simplificada**, copiada do projeto WebGIS Empreender, e o workflow tenta substituí-la pela malha oficial IBGE antes de publicar.
 - Consulta sob demanda à API v2 da Câmara dos Deputados para deputados federais do RS, com primeiras páginas de proposições e lançamentos de despesa. **Essas páginas não são totais anuais.**
 - Enriquecimento automático do TSE 2024 para candidaturas e total dos bens autodeclarados, com conciliação exata e sem publicar CPF, descrições de imóveis ou endereços.
+- Fotografia separada da composição apresentada pela Câmara de Canoas em outubro de 2026, sem confundir eleitos com quem aparece na relação institucional.
+- Bancada de três senadores em exercício pelo RS, com mandatos e partidos segundo fonte do Congresso Nacional; representantes estaduais, não exclusivamente municipais.
 - Site estático, responsivo, sem backend pago ou chaves de API; GitHub Actions para testes, coleta de fontes e publicação.
 
 ## Publicação no GitHub Pages
@@ -56,13 +58,16 @@ Não é necessário instalar bibliotecas extras: o frontend usa HTML, CSS e Java
 - data/politicos.json e data/eleicoes.json: base eleitoral municipal.
 - data/canoas.geojson: geometria provisória; atualizada pelo IBGE no deploy se validada.
 - data/tse-2024.json: enriquecimento de candidaturas e bens; pode permanecer pendente.
+- data/composicao-camara.json: fotografia institucional da Câmara municipal.
+- data/senadores-rs.json: senadores em exercício pelo RS em outubro de 2026.
+- extras.js, extras.css: telas de exercício municipal e Senado.
 - scripts/sync_sources.py: pipeline oficial de atualização atômica.
 - tests/test_project.py: testes de integridade e coerência.
 - METODOLOGIA.md: regras e lacunas.
 
 ## Limitações ainda abertas
 
-O portal original integra informações de todos os níveis federativos. Aqui foi implementado o **núcleo eleitoral municipal 2024**, com consulta federal complementar. Não estão concluídas as fichas de senadores, deputados estaduais, governador, presidente, o histórico de candidaturas anteriores a 2024, a situação efetiva das cadeiras municipais em cada data, nem os indicadores individualizados de presença, votos e despesas municipais.
+O portal original integra informações de todos os níveis federativos. Aqui foi implementado o **núcleo eleitoral municipal 2024**, com consulta federal complementar. Não estão concluídos os perfis detalhados dos senadores (a lista dos três senadores do RS está implementada), deputados estaduais, governador, presidente, o histórico de candidaturas anteriores a 2024, a situação efetiva das cadeiras municipais em cada data, nem os indicadores individualizados de presença, votos e despesas municipais.
 
 Não foi confirmada API aberta da Câmara Municipal com todas essas métricas; por isso a aplicação não atribui dados por aproximação de nomes nem chama de ausência uma sessão sem lista. Para ampliar a cobertura serão necessárias fontes oficiais, identificadores estáveis e conferência de qualidade.
 
