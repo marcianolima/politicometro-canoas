@@ -43,6 +43,19 @@ class FinanceTests(unittest.TestCase):
         self.assertGreater(p["aplicacoesVinculadas"]["educacaoPercentual"],25)
         self.assertGreater(p["aplicacoesVinculadas"]["saudePercentual"],15)
 
+    def test_2026_partial_rreo_is_explicitly_approximate(self):
+        data=read("financas-2026-referencia.json")
+        self.assertEqual(data["municipioIbge"],"4304606")
+        self.assertEqual(data["ano"],2026)
+        self.assertEqual(data["bimestre"],4)
+        self.assertTrue(data["aproximado"])
+        self.assertIn("secundaria",data["status"])
+        self.assertEqual(data["ate"],"2026-08-31")
+        self.assertLessEqual(data["despesaPaga"],data["despesaLiquidada"])
+        self.assertLessEqual(data["despesaLiquidada"],data["despesaEmpenhada"])
+        self.assertLess(data["investimentosEmpenhados"],data["despesaEmpenhada"])
+        self.assertGreaterEqual(len(data["fontes"]),2)
+
     def test_pncp_contracts_not_inferred_from_missing_records(self):
         data=read("contratos-pncp.json")
         self.assertEqual(data["cnpjOrgao"],"88577416000118")
@@ -109,7 +122,7 @@ class FinanceTests(unittest.TestCase):
         page=(ROOT/"financas.html").read_text(encoding="utf-8")
         js=(ROOT/"financas.js").read_text(encoding="utf-8")
         home=(ROOT/"index.html").read_text(encoding="utf-8")
-        for file in ("financas.html","financas.css","financas.js","dca.js","dca.css"):
+        for file in ("financas.html","financas.css","financas.js","dca.js","dca.css","finance-current.js"):
             self.assertTrue((ROOT/file).is_file())
         self.assertIn("financas.html",home)
         ids=re.findall(r'\bid="([^"]+)"',page)
