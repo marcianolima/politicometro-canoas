@@ -53,6 +53,9 @@ async function financeOne(label,viewport){
  const exceptions=[];page.on("pageerror",e=>exceptions.push(e.message));
  const response=await page.goto(base+"financas.html",{waitUntil:"domcontentloaded",timeout:25000});
  assert.equal(response.status(),200,"Página de finanças HTTP 200");
+ await page.locator("#current2026Metrics .fiscal-metric").first().waitFor({timeout:20000});
+ assert.equal(await page.locator("#current2026Metrics .fiscal-metric").count(),7,"sete indicadores de 2026");
+ assert.match(await page.locator("#current2026Notice").innerText(),/aproximados|aproximad/i,"RREO 2026 aprox. explicitado");
  await page.locator(".fiscal-metric").first().waitFor({timeout:20000});
  assert.equal(await page.locator(".fiscal-metric").count(),6,"6 indicadores fiscais");
  assert.equal(await page.locator("#periodSelect").inputValue(),"2024-12-31","fechamento anual padrão");
