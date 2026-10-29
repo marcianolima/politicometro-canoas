@@ -1,0 +1,14 @@
+{
+  "status": "aguardando-coleta",
+  "cnpjOrgao": "88577416000118",
+  "municipio": "Canoas",
+  "ibge": "4304606",
+  "inicio": null,
+  "fim": null,
+  "coletadoEm": null,
+  "cobertura": "2026",
+  "fonte": "https://pncp.gov.br/api/consulta/swagger-ui/index.html",
+  "totalRegistros": 0,
+  "contratos": [],
+  "observacao": "O PNCP divulga contratos publicados, não pagamentos, empenhos municipais consolidados ou execução física de obras. Sem uma coleta integral bem-sucedida, o painel não apresenta totais como se fossem zero."
+}
