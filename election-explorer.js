@@ -103,7 +103,10 @@ async function boot(){
  try{
   const [major,people,sections]=await Promise.all([load("data/prefeito-2024.json"),load("data/politicos.json"),load("data/secoes-2024.json")]);
   if(major.municipioIbge!=="4304606"||!Array.isArray(people)||people.length!==23||sections.municipioIbge!=="4304606")throw Error("Dados não pertencem a Canoas");
-  z.mayor=major;z.people=people;z.sections=sections;renderCandidates();
+  z.mayor=major;z.people=people;z.sections=sections;
+  const desired=new URL(location.href).searchParams.get("candidate");
+  if(desired){if(people.some(p=>p.id===desired&&p.cargo==="Vereador"))z.role="council";else if(major.segundoTurno.some(p=>p.id===desired))z.role="pref2";else if(major.primeiroTurno.some(p=>p.id===desired))z.role="pref1"}
+  $("#electionGroup").value=z.role;renderCandidates();
  }catch(error){$("#sectionStatus").textContent="Erro ao carregar os dados eleitorais: "+error.message}
 }
 document.addEventListener("DOMContentLoaded",boot);
