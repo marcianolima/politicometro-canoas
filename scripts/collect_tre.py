@@ -54,14 +54,16 @@ def fetch(url):
 
 def collect():
     elected=json.loads((DATA/"politicos.json").read_text(encoding="utf-8"))
+    mayor=json.loads((DATA/"prefeito-2024.json").read_text(encoding="utf-8"))
+    contestants=[p for p in elected if p["cargo"]=="Vereador"]
+    contestants += [{**p,"cargo":"Prefeito","turno":1} for p in mayor["primeiroTurno"]]
+    contestants += [{**p,"cargo":"Prefeito","turno":2} for p in mayor["segundoTurno"]]
     old=json.loads((DATA/"secoes-2024.json").read_text(encoding="utf-8"))
     verified={}
     failures=[]
-    for person in elected:
-        if person["cargo"]=="Vice-prefeito":
-            continue
+    for person in contestants:
         role=11 if person["cargo"]=="Prefeito" else 13
-        turn=620 if role==11 else 619
+        turn=620 if role==11 and person.get("turno")==2 else 619
         number=person["numero"]
         url=f"{BASE}/{turn}/85898/cand_{role}_{number}.html"
         try:
@@ -71,7 +73,7 @@ def collect():
             sum_votes=sum(z["votos"] for z in zones)
             if sum_votes!=person["votos"]:
                 raise ValueError(f"Total {sum_votes} difere da eleição {person['votos']}")
-            verified[person["id"]]={"turno":2 if role==11 else 1,
+            verified[person["id"]]={"turno":2 if turn==620 else 1,
                                     "fonte":url,"total":sum_votes,"zonas":zones}
             print("TRE_OK",person["id"],sum_votes,len(zones),flush=True)
         except Exception as e:
@@ -80,12 +82,12 @@ def collect():
     # Não substituir um snapshot com cobertura melhor por uma coleta parcial.
     previous=old.get("candidatos") or {}
     for person_id,value in previous.items():
-        if person_id not in verified and person_id in {p["id"] for p in elected}:
+        if person_id not in verified and person_id in {p["id"] for p in contestants}:
             verified[person_id]=value
     if len(verified)<18:
         print("TRE_INSUFICIENTE",len(verified),"arquivos conservados")
         return
-    result={"status":"verificado" if len(verified)==22 else "parcial",
+    result={"status":"verificado" if len(verified)==29 else "parcial",
             "municipioIbge":"4304606","referencia":"Eleições Municipais 2024",
             "coletadoEm":datetime.now(timezone.utc).isoformat(),
             "fonte":BASE+"/619/RS85898.html",
