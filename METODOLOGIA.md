@@ -12,6 +12,14 @@ No primeiro turno, 259.585 aptos, 176.956 comparecimentos, 82.629 abstenções; 
 
 Segundo turno: 259.585 aptos, 166.869 comparecimentos, 92.716 abstenções, 10.434 brancos, 11.229 nulos, 75.688 votos para Airton Souza e 69.518 para Jairo Jorge. Soma dos dois candidatos = 145.206 votos nominais válidos. As barras mostram frações deste total, e não do eleitorado apto. O vice integra a mesma chapa, sem votos individualizados.
 
+## Recortes eleitorais e granularidade
+
+O módulo de análise eleitoral disponibiliza seis candidaturas a prefeito no primeiro turno de 2024 (total nominal 145.986 votos), duas no segundo turno (145.206 votos) e os 21 vereadores eleitos no primeiro turno. Os resultados municipais correspondem à totalização TRE-RS; ordenar por votos não deve ser confundido com status de eleito na eleição proporcional.
+
+O coletor scripts/collect_tre.py lê as páginas oficiais de cada candidatura e agrega apenas os pares "zona / seção / votação" publicados pelo TRE-RS. Cada zona precisa fechar com o número do respectivo cabeçalho; todos os votos das zonas devem somar exatamente os votos nominais municipais da candidatura. Falhas, divergências, duplicidades de seção e recortes incompletos não são exibidos como resultados oficiais. Fotografia anterior aprovada é preservada.
+
+A zona e a seção são identificadores eleitorais; **não são endereços, bairros, coordenadas ou áreas residenciais.** A plataforma não produz mapas coropléticos por bairro com esses resultados sem georreferenciamento e metodologia explícita.
+
 ## Dados TSE e patrimônio
 
 O script acessa o catálogo CKAN oficial, localiza os arquivos ZIP consulta_cand_2024 e bem_candidato_2024 e lê os CSVs do RS. A conciliação exige município, cargo, número e partido, e rejeita ambiguidades entre SQ_CANDIDATO. Sem fuzzy matching ou CPF. Se menos de 19 perfis forem conciliados, preserva-se o arquivo anterior.
@@ -26,7 +34,7 @@ A API da Câmara dos Deputados oferece informações parciais, apresentadas sem 
 
 ## Cartografia
 
-A malha inicial do projeto é um polígono **muito simplificado**, recuperado do repositório webgis-empreender-canoas. O coletor tenta baixar o GeoJSON oficial do IBGE, verificando Polygon/MultiPolygon, bounding box, quantidade de vértices e código 4304606. Registra qualidade, origem e data da coleta. Sem pontos de residências de políticos, sem votação por bairro inventada.
+A malha inicial do projeto é um polígono **muito simplificado**, recuperado do repositório webgis-empreender-canoas. O coletor tenta baixar o GeoJSON oficial do IBGE na qualidade máxima, verificando Polygon/MultiPolygon, bounding box, quantidade de vértices e código 4304606. Registra qualidade, origem e data da coleta. Sem pontos de residências de políticos, sem votação por bairro inventada.
 
 ## Atualizações e lacunas
 
