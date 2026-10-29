@@ -174,7 +174,7 @@
     return card;
   }
   function filterContracts(){
-    if(state.pncp?.status!=="verificado")return;
+    if(!["verificado","parcial"].includes(state.pncp?.status))return;
     const search=$("#contractSearch").value.normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().trim();
     const scope=$("#contractScope").value;
     const order=$("#contractOrder").value;
@@ -204,7 +204,7 @@
   function showPncp(value){
     const notice=$("#pncpNotice"),summary=$("#contractOverview"),list=$("#contractList");
     state.pncp=value;
-    if(value.status!=="verificado"){
+    if(!["verificado","parcial"].includes(value.status)){
       notice.className="finance-note finance-partial";
       notice.textContent="Coleta PNCP ainda não concluída ou homologada. Sem dados coletados não significa ausência de contratos: consulte o portal oficial.";
       clear(summary);clear(list,node("p","finance-empty","Não há uma fotografia anual íntegra e validada do PNCP neste repositório. Uma atualização automatizada será apresentada depois de concluída."));
@@ -215,10 +215,11 @@
     if(!cnpjOk||!Array.isArray(value.contratos)||value.totalRegistros!==value.contratos.length)throw Error("Catálogo PNCP inconsistente.");
     const c=value.contratos;
     state.contracts=c;
-    notice.className="finance-note";
-    notice.textContent="Fonte PNCP · CNPJ 88.577.416/0001-18 · publicações de "+value.inicio+" até "+value.fim+". Fotografia coletada em "+value.coletadoEm.slice(0,10)+". Atenção: o catálogo não equivale à execução orçamentária.";
+    const partial=value.status==="parcial";
+    notice.className="finance-note"+(partial?" finance-partial":"");
+    notice.textContent=(partial?"COBERTURA PARCIAL (NÃO TOTAL ANUAL). ":"Cobertura do período consultado. ")+ "Fonte PNCP · CNPJ 88.577.416/0001-18 · contratos publicados entre "+value.inicio+" e "+value.fim+". "+(partial?"Período seguinte não concluído; não se deve extrapolar para o ano. ":"")+ "Fotografia de "+value.coletadoEm.slice(0,10)+". Contratos não são despesas pagas.";
     clear(summary,
-      metric("Contratos publicados",c.length,"Registros no catálogo "+value.cobertura+" (não total de licitações)."),
+      metric("Contratos publicados",c.length,"Registros no período "+value.inicio+" a "+value.fim+"; não total do ano quando parcial."),
       metric("Soma dos valores informados",c.reduce((s,v)=>s+v.valor,0),"Soma de valores contratuais; não são despesas pagas."),
       metric("Objetos ligados a obras",c.filter(contractMatchesWork).length,"Identificação temática pelo texto contratual, não medição física.")
     );
